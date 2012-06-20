@@ -122,19 +122,28 @@ if __name__ == '__main__':
 
   text = sys.stdin.read()
 
-  l = mklist(text)
+  paragraphs = text.split('\n\n')
 
-  lines = split_lines(l, col_width)
-  justify(lines, col_width)
+  p_lines = []
+  for p in paragraphs:
+    l = mklist(p)
+    if l is None:
+      continue
 
-  height = int(ceil(1. * len(lines) / cols))
+    lines = split_lines(l, col_width)
+    justify(lines, col_width)
+    
+    p_lines += lines
+    p_lines += ['']
+
+  height = int(ceil(1. * len(p_lines) / cols))
 
   for row in range(height):
     for col in range(cols):
       index = row + height * col
-      if index < len(lines):
-        sys.stdout.write(str(lines[index]))
+      if index < len(p_lines):
+        sys.stdout.write(str(p_lines[index]))
 
-        padding = col_space - len(str(lines[index]))
+        padding = col_space - len(str(p_lines[index]))
         sys.stdout.write(' ' * padding)
     sys.stdout.write('\n')
