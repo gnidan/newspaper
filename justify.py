@@ -6,6 +6,7 @@
 import sys
 from random import seed, random
 from math import ceil
+from StringIO import StringIO
 
 ALLEY=4
 
@@ -101,6 +102,17 @@ def justify(lines, cols):
       choice.car += ' '
 
 
+def page_footer(page=0, pages=0):
+  page_footer = StringIO()
+  page_number = '-- ' + str(page + 1) + " / " + str(pages) + ' --'
+  page_footer.write('\n')
+  page_footer.write(' ' * ((page_width - len(page_number)) / 2))
+  page_footer.write(page_number)
+  page_footer.write(' ' * ((page_width - len(page_number)) / 2))
+  page_footer.write('\n\n')
+  return page_footer.getvalue()
+
+
 if __name__ == '__main__':
   seed()
   from optparse import OptionParser
@@ -149,12 +161,16 @@ if __name__ == '__main__':
 
   height = int(ceil(1. * len(p_lines) / cols))
 
-  pages = height / page_height
+  fake_page_footer = page_footer()
+  text_height = page_height - fake_page_footer.count('\n') - 1
+
+  pages = int(ceil(1. * height / text_height))
 
   for page in range(pages):
-    for row in range(page_height):
+
+    for row in range(text_height):
       for col in range(cols):
-        index = page * page_height * cols + page_height * col + row
+        index = page * text_height * cols + text_height * col + row
         if index < len(p_lines):
           line = str(p_lines[index])
           padding = col_space - len(line)
@@ -168,10 +184,4 @@ if __name__ == '__main__':
           sys.stdout.write(' ' * padding)
       sys.stdout.write('\n')
 
-    # page footer
-    sys.stdout.write('\n')
-    sys.stdout.write(' ' * (page_width / 2 - 4))
-    sys.stdout.write('-' * 8)
-    sys.stdout.write(' ' * (page_width / 2- 4))
-    sys.stdout.write('\n\n')
-
+    sys.stdout.write(page_footer(page, pages))
