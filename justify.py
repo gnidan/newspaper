@@ -103,7 +103,7 @@ if __name__ == '__main__':
   from optparse import OptionParser
 
   parser = OptionParser()
-  parser.add_option('-w', '--width', dest="width",
+  parser.add_option('-w', '--width', dest="width", type="int",
       help="Number of columns for each line", default=80)
 
   (options, args) = parser.parse_args()
