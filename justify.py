@@ -177,11 +177,11 @@ if __name__ == '__main__':
 
           if col != 0:
             sys.stdout.write(' ' * (ALLEY / 2))
-            padding -= ALLEY / 2
 
           sys.stdout.write(line)
 
-          sys.stdout.write(' ' * padding)
+          if col != cols - 1:
+            sys.stdout.write(' ' * padding)
       sys.stdout.write('\n')
 
     sys.stdout.write(page_footer(page, pages))
