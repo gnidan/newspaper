@@ -106,21 +106,32 @@ if __name__ == '__main__':
   from optparse import OptionParser
 
   parser = OptionParser()
+  parser.add_option('-f', '--filename', dest="filename", type="string",
+      help="Filename to read", default=None, metavar="FILE")
   parser.add_option('-w', '--width', dest="width", type="int",
       help="Width of each line", default=80)
   parser.add_option('-c', '--cols', dest="cols", type="int",
       help="Number of columns", default=2)
+  parser.add_option('-H', '--height', dest="page_height", type="int",
+      help="Height of each page", default=24)
 
   (options, args) = parser.parse_args()
 
   cols = options.cols
-  col_space = options.width / options.cols
-  if options.cols > 1:
-    col_width = col_space - ALLEY
+  page_height = options.page_height
+  page_width = options.width
+
+  col_space = page_width / cols
+  if cols > 1:
+    col_width = col_space - ALLEY / 2
   else:
     col_width = col_space
 
-  text = sys.stdin.read()
+  if options.filename is not None:
+    with open(options.filename, 'r') as f:
+      text = f.read()
+  else:
+    text = sys.stdin.read()
 
   paragraphs = text.split('\n\n')
 
@@ -138,12 +149,29 @@ if __name__ == '__main__':
 
   height = int(ceil(1. * len(p_lines) / cols))
 
-  for row in range(height):
-    for col in range(cols):
-      index = row + height * col
-      if index < len(p_lines):
-        sys.stdout.write(str(p_lines[index]))
+  pages = height / page_height
 
-        padding = col_space - len(str(p_lines[index]))
-        sys.stdout.write(' ' * padding)
+  for page in range(pages):
+    for row in range(page_height):
+      for col in range(cols):
+        index = page * page_height * cols + page_height * col + row
+        if index < len(p_lines):
+          line = str(p_lines[index])
+          padding = col_space - len(line)
+
+          if col != 0:
+            sys.stdout.write(' ' * (ALLEY / 2))
+            padding -= ALLEY / 2
+
+          sys.stdout.write(line)
+
+          sys.stdout.write(' ' * padding)
+      sys.stdout.write('\n')
+
+    # page footer
     sys.stdout.write('\n')
+    sys.stdout.write(' ' * (page_width / 2 - 4))
+    sys.stdout.write('-' * 8)
+    sys.stdout.write(' ' * (page_width / 2- 4))
+    sys.stdout.write('\n\n')
+
