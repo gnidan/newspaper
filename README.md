@@ -1,5 +1,5 @@
-txtset
-======
+newspaper
+=========
 
 Justify
 -------
