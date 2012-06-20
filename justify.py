@@ -5,6 +5,9 @@
 
 import sys
 from random import seed, random
+from math import ceil
+
+ALLEY=4
 
 class Word:
   def __init__(self, cargo=None, next=None):
@@ -104,16 +107,34 @@ if __name__ == '__main__':
 
   parser = OptionParser()
   parser.add_option('-w', '--width', dest="width", type="int",
-      help="Number of columns for each line", default=80)
+      help="Width of each line", default=80)
+  parser.add_option('-c', '--cols', dest="cols", type="int",
+      help="Number of columns", default=2)
 
   (options, args) = parser.parse_args()
+
+  cols = options.cols
+  col_space = options.width / options.cols
+  if options.cols > 1:
+    col_width = col_space - ALLEY
+  else:
+    col_width = col_space
 
   text = sys.stdin.read()
 
   l = mklist(text)
 
-  lines = split_lines(l, options.width)
-  justify(lines, options.width)
+  lines = split_lines(l, col_width)
+  justify(lines, col_width)
 
-  for line in lines:
-    print line
+  height = int(ceil(1. * len(lines) / cols))
+
+  for row in range(height):
+    for col in range(cols):
+      index = row + height * col
+      if index < len(lines):
+        sys.stdout.write(str(lines[index]))
+
+        padding = col_space - len(str(lines[index]))
+        sys.stdout.write(' ' * padding)
+    sys.stdout.write('\n')
