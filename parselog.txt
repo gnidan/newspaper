@@ -1,0 +1,208 @@
+   yacc.py:3095:Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+   yacc.py:3159:
+   yacc.py:3160:Grammar
+   yacc.py:3161:
+   yacc.py:3163:Rule 0     S' -> document
+   yacc.py:3163:Rule 1     document -> block_list
+   yacc.py:3163:Rule 2     block_list -> block block_list
+   yacc.py:3163:Rule 3     block_list -> <empty>
+   yacc.py:3163:Rule 4     block -> line header blank
+   yacc.py:3163:Rule 5     block -> paragraph blank
+   yacc.py:3163:Rule 6     header -> HEADER NEWLINE
+   yacc.py:3163:Rule 7     paragraph -> paragraph line
+   yacc.py:3163:Rule 8     paragraph -> line
+   yacc.py:3163:Rule 9     line -> WORD line
+   yacc.py:3163:Rule 10    line -> WORD NEWLINE
+   yacc.py:3163:Rule 11    blank -> NEWLINE
+   yacc.py:3181:
+   yacc.py:3182:Terminals, with rules where they appear
+   yacc.py:3183:
+   yacc.py:3187:HEADER               : 6
+   yacc.py:3187:NEWLINE              : 6 10 11
+   yacc.py:3187:WORD                 : 9 10
+   yacc.py:3187:error                : 
+   yacc.py:3189:
+   yacc.py:3190:Nonterminals, with rules where they appear
+   yacc.py:3191:
+   yacc.py:3195:blank                : 4 5
+   yacc.py:3195:block                : 2
+   yacc.py:3195:block_list           : 1 2
+   yacc.py:3195:document             : 0
+   yacc.py:3195:header               : 4
+   yacc.py:3195:line                 : 4 7 8 9
+   yacc.py:3195:paragraph            : 5 7
+   yacc.py:3196:
+   yacc.py:2371:Parsing method: LALR
+   yacc.py:2389:
+   yacc.py:2390:state 0
+   yacc.py:2391:
+   yacc.py:2393:    (0) S' -> . document
+   yacc.py:2393:    (1) document -> . block_list
+   yacc.py:2393:    (2) block_list -> . block block_list
+   yacc.py:2393:    (3) block_list -> .
+   yacc.py:2393:    (4) block -> . line header blank
+   yacc.py:2393:    (5) block -> . paragraph blank
+   yacc.py:2393:    (9) line -> . WORD line
+   yacc.py:2393:    (10) line -> . WORD NEWLINE
+   yacc.py:2393:    (7) paragraph -> . paragraph line
+   yacc.py:2393:    (8) paragraph -> . line
+   yacc.py:2394:
+   yacc.py:2504:    $end            reduce using rule 3 (block_list -> .)
+   yacc.py:2504:    WORD            shift and go to state 1
+   yacc.py:2506:
+   yacc.py:2531:    paragraph                      shift and go to state 2
+   yacc.py:2531:    block_list                     shift and go to state 3
+   yacc.py:2531:    line                           shift and go to state 4
+   yacc.py:2531:    document                       shift and go to state 5
+   yacc.py:2531:    block                          shift and go to state 6
+   yacc.py:2389:
+   yacc.py:2390:state 1
+   yacc.py:2391:
+   yacc.py:2393:    (9) line -> WORD . line
+   yacc.py:2393:    (10) line -> WORD . NEWLINE
+   yacc.py:2393:    (9) line -> . WORD line
+   yacc.py:2393:    (10) line -> . WORD NEWLINE
+   yacc.py:2394:
+   yacc.py:2504:    NEWLINE         shift and go to state 8
+   yacc.py:2504:    WORD            shift and go to state 1
+   yacc.py:2506:
+   yacc.py:2531:    line                           shift and go to state 7
+   yacc.py:2389:
+   yacc.py:2390:state 2
+   yacc.py:2391:
+   yacc.py:2393:    (5) block -> paragraph . blank
+   yacc.py:2393:    (7) paragraph -> paragraph . line
+   yacc.py:2393:    (11) blank -> . NEWLINE
+   yacc.py:2393:    (9) line -> . WORD line
+   yacc.py:2393:    (10) line -> . WORD NEWLINE
+   yacc.py:2394:
+   yacc.py:2504:    NEWLINE         shift and go to state 9
+   yacc.py:2504:    WORD            shift and go to state 1
+   yacc.py:2506:
+   yacc.py:2531:    line                           shift and go to state 10
+   yacc.py:2531:    blank                          shift and go to state 11
+   yacc.py:2389:
+   yacc.py:2390:state 3
+   yacc.py:2391:
+   yacc.py:2393:    (1) document -> block_list .
+   yacc.py:2394:
+   yacc.py:2504:    $end            reduce using rule 1 (document -> block_list .)
+   yacc.py:2506:
+   yacc.py:2389:
+   yacc.py:2390:state 4
+   yacc.py:2391:
+   yacc.py:2393:    (4) block -> line . header blank
+   yacc.py:2393:    (8) paragraph -> line .
+   yacc.py:2393:    (6) header -> . HEADER NEWLINE
+   yacc.py:2394:
+   yacc.py:2504:    NEWLINE         reduce using rule 8 (paragraph -> line .)
+   yacc.py:2504:    WORD            reduce using rule 8 (paragraph -> line .)
+   yacc.py:2504:    HEADER          shift and go to state 13
+   yacc.py:2506:
+   yacc.py:2531:    header                         shift and go to state 12
+   yacc.py:2389:
+   yacc.py:2390:state 5
+   yacc.py:2391:
+   yacc.py:2393:    (0) S' -> document .
+   yacc.py:2394:
+   yacc.py:2506:
+   yacc.py:2389:
+   yacc.py:2390:state 6
+   yacc.py:2391:
+   yacc.py:2393:    (2) block_list -> block . block_list
+   yacc.py:2393:    (2) block_list -> . block block_list
+   yacc.py:2393:    (3) block_list -> .
+   yacc.py:2393:    (4) block -> . line header blank
+   yacc.py:2393:    (5) block -> . paragraph blank
+   yacc.py:2393:    (9) line -> . WORD line
+   yacc.py:2393:    (10) line -> . WORD NEWLINE
+   yacc.py:2393:    (7) paragraph -> . paragraph line
+   yacc.py:2393:    (8) paragraph -> . line
+   yacc.py:2394:
+   yacc.py:2504:    $end            reduce using rule 3 (block_list -> .)
+   yacc.py:2504:    WORD            shift and go to state 1
+   yacc.py:2506:
+   yacc.py:2531:    paragraph                      shift and go to state 2
+   yacc.py:2531:    block_list                     shift and go to state 14
+   yacc.py:2531:    line                           shift and go to state 4
+   yacc.py:2531:    block                          shift and go to state 6
+   yacc.py:2389:
+   yacc.py:2390:state 7
+   yacc.py:2391:
+   yacc.py:2393:    (9) line -> WORD line .
+   yacc.py:2394:
+   yacc.py:2504:    HEADER          reduce using rule 9 (line -> WORD line .)
+   yacc.py:2504:    NEWLINE         reduce using rule 9 (line -> WORD line .)
+   yacc.py:2504:    WORD            reduce using rule 9 (line -> WORD line .)
+   yacc.py:2506:
+   yacc.py:2389:
+   yacc.py:2390:state 8
+   yacc.py:2391:
+   yacc.py:2393:    (10) line -> WORD NEWLINE .
+   yacc.py:2394:
+   yacc.py:2504:    HEADER          reduce using rule 10 (line -> WORD NEWLINE .)
+   yacc.py:2504:    NEWLINE         reduce using rule 10 (line -> WORD NEWLINE .)
+   yacc.py:2504:    WORD            reduce using rule 10 (line -> WORD NEWLINE .)
+   yacc.py:2506:
+   yacc.py:2389:
+   yacc.py:2390:state 9
+   yacc.py:2391:
+   yacc.py:2393:    (11) blank -> NEWLINE .
+   yacc.py:2394:
+   yacc.py:2504:    WORD            reduce using rule 11 (blank -> NEWLINE .)
+   yacc.py:2504:    $end            reduce using rule 11 (blank -> NEWLINE .)
+   yacc.py:2506:
+   yacc.py:2389:
+   yacc.py:2390:state 10
+   yacc.py:2391:
+   yacc.py:2393:    (7) paragraph -> paragraph line .
+   yacc.py:2394:
+   yacc.py:2504:    NEWLINE         reduce using rule 7 (paragraph -> paragraph line .)
+   yacc.py:2504:    WORD            reduce using rule 7 (paragraph -> paragraph line .)
+   yacc.py:2506:
+   yacc.py:2389:
+   yacc.py:2390:state 11
+   yacc.py:2391:
+   yacc.py:2393:    (5) block -> paragraph blank .
+   yacc.py:2394:
+   yacc.py:2504:    WORD            reduce using rule 5 (block -> paragraph blank .)
+   yacc.py:2504:    $end            reduce using rule 5 (block -> paragraph blank .)
+   yacc.py:2506:
+   yacc.py:2389:
+   yacc.py:2390:state 12
+   yacc.py:2391:
+   yacc.py:2393:    (4) block -> line header . blank
+   yacc.py:2393:    (11) blank -> . NEWLINE
+   yacc.py:2394:
+   yacc.py:2504:    NEWLINE         shift and go to state 9
+   yacc.py:2506:
+   yacc.py:2531:    blank                          shift and go to state 15
+   yacc.py:2389:
+   yacc.py:2390:state 13
+   yacc.py:2391:
+   yacc.py:2393:    (6) header -> HEADER . NEWLINE
+   yacc.py:2394:
+   yacc.py:2504:    NEWLINE         shift and go to state 16
+   yacc.py:2506:
+   yacc.py:2389:
+   yacc.py:2390:state 14
+   yacc.py:2391:
+   yacc.py:2393:    (2) block_list -> block block_list .
+   yacc.py:2394:
+   yacc.py:2504:    $end            reduce using rule 2 (block_list -> block block_list .)
+   yacc.py:2506:
+   yacc.py:2389:
+   yacc.py:2390:state 15
+   yacc.py:2391:
+   yacc.py:2393:    (4) block -> line header blank .
+   yacc.py:2394:
+   yacc.py:2504:    WORD            reduce using rule 4 (block -> line header blank .)
+   yacc.py:2504:    $end            reduce using rule 4 (block -> line header blank .)
+   yacc.py:2506:
+   yacc.py:2389:
+   yacc.py:2390:state 16
+   yacc.py:2391:
+   yacc.py:2393:    (6) header -> HEADER NEWLINE .
+   yacc.py:2394:
+   yacc.py:2504:    NEWLINE         reduce using rule 6 (header -> HEADER NEWLINE .)
+   yacc.py:2506:
