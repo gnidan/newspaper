@@ -60,7 +60,7 @@ def split_lines(l, cols):
     # based on line length, either cut and skip to the next line, or append
     # to the current.
     #
-    # some funkiness here in the if condition to avoid having lines end in 
+    # some funkiness here in the if condition to avoid having lines end in
     # spaces
     if w.is_space() and w.cdr and acc + len(w.car) + len(w.cdr.car) > cols \
         or acc + len(w.car) > cols:
@@ -155,7 +155,7 @@ if __name__ == '__main__':
 
     lines = split_lines(l, col_width)
     justify(lines, col_width)
-    
+
     p_lines += lines
     p_lines += ['']
 
