@@ -59,6 +59,7 @@ class List(Field):
         super(List, self).__init__(*args, **kwargs)
 
     def assign(self, values, *args, **kwargs):
+        logger.info(values)
         for value in values:
             super(List, self).assign(value, *args, **kwargs)
 
@@ -109,7 +110,13 @@ class Node(object):
 
     def __str__(self):
         names = [name for name, field in self.__class__._fields]
-        values = [getattr(self, name, None) for name in names]
+        values = []
+        for name in names:
+            value = getattr(self, name, None)
+            if isinstance(value, list):
+                value = [str(item) for item in value]
+            values = values + [value]
+
 
         attrs = " ".join(["{}={}".format(name, value) for name, value in
                           zip(names, values)])\

@@ -19,4 +19,3 @@ class ASTTestCase(TestCase):
         logger.debug(Word._fields)
         self.assertEquals(len(s.nodes), 5)
         self.assertEquals(s.nodes[0].word, "This")
-

@@ -4,13 +4,16 @@ from newspaper.ast import ast
 
 logger = logging.getLogger(__name__)
 
+class Node(ast.Node):
+    pass
+
 #
 # Word-Level Nodes
 #
-class Word(ast.Node):
+class Word(Node):
     word = ast.Field(str, unicode)
 
-class Punctuation(ast.Node):
+class Punctuation(Node):
     mark = ast.Field(str, unicode)
     align = ast.Field("left", "right", "no_align")
 
@@ -19,7 +22,7 @@ class Punctuation(ast.Node):
 # Inline Nodes
 #
 
-class Text(ast.Node):
+class Text(Node):
     nodes = ast.List(Word, Punctuation, nested=True)
 
 class Sentence(Text):
@@ -29,7 +32,7 @@ class Sentence(Text):
 #
 # Block-Level Nodes
 #
-class Block(ast.Node):
+class Block(Node):
     text = ast.Field(Text)
 
 class Header(Block):
@@ -42,3 +45,6 @@ class Paragraph(Block):
 #
 # Top-Level Node
 #
+class Document(Node):
+    blocks = ast.List(Block)
+
