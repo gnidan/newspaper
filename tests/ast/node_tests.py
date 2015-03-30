@@ -39,8 +39,6 @@ class NodeTestCase(TestCase):
 
     def test_node_str(self):
         class AlignedNode(Node):
-            _name = 'AlignedNode'
-
             align = Field("left", "right", "none")
 
         n = AlignedNode("left")
@@ -90,3 +88,16 @@ class NodeTestCase(TestCase):
 
         n = N()
         self.assertEquals(n.i, 5)
+
+    def test_inheritance(self):
+        class A(Node):
+            foo = Field(int)
+            bar = Field(int)
+
+        class B(A):
+            foo = Field(str)
+
+        a = A(foo=1, bar=2)
+
+        with self.assertRaises(Exception):
+            b = B(foo=1, bar=2)

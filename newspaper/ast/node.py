@@ -22,9 +22,8 @@ class Punctuation(ast.Node):
 class Text(ast.Node):
     nodes = ast.List(Word, Punctuation, nested=True)
 
-class Sentence(ast.Node):
-    nodes = ast.List(Word, Punctuation, nested=True)
-
+class Sentence(Text):
+    pass
 
 
 #

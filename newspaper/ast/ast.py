@@ -70,11 +70,20 @@ class NodeMeta(type):
         if 'class_id' not in dct:
             dct['class_id'] = name.lower()
 
-        cls._fields = [(name, field) for name, field in dct.iteritems()
-                       if isinstance(field, Field)]
-
         if '_name' not in dct:
             cls._name = name
+
+
+        fields = dict()
+
+        for parent in parents:
+            if getattr(parent, '_fields', None) is not None:
+                fields.update(dict(parent._fields))
+
+        fields.update({name: field for name, field in dct.iteritems()
+                       if isinstance(field, Field)})
+
+        cls._fields = fields.items()
 
         # we need to call type.__init__ to complete the initialization
         return super(NodeMeta, cls).__init__(name, parents, dct)
@@ -105,6 +114,6 @@ class Node(object):
         attrs = " ".join(["{}={}".format(name, value) for name, value in
                           zip(names, values)])\
                    .strip()
-        desc = "{} {}".format(self.__class__._name, attrs)\
+        desc = "{} {}".format(self.__class__.__name__, attrs)\
                          .strip()
         return "({})".format(desc)
