@@ -6,13 +6,15 @@ parser = parsley.makeGrammar(
     """
     word = <letter+>:ls -> utils.make_word(ls)
 
-    word_punc = punctuation*
+    sp = exactly(' ')
 
-    wordws = word:word exactly(' ')* -> word
+    mark = ',' | '.' | '"' | '!' | '?' | "'" | ':' | ';'
+
+    chunk = mark*:ls word:w mark*:rs sp* -> utils.make_chunk(ls, w, rs)
 
     vspace = '\\n' | '\\r\\n' | '\\r'
 
-    line = wordws+:words vspace -> utils.make_line(words)
+    line = chunk+:chunks vspace -> utils.make_line(chunks)
 
     paragraph = line+:lines vspace+ -> utils.make_paragraph(lines)
 
