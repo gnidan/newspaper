@@ -25,6 +25,11 @@ class Punctuation(Node):
 class Text(Node):
     nodes = ast.List(Word, Punctuation, nested=True)
 
+    @classmethod
+    def join(cls, texts):
+        joined = [node for text in texts for node in text.nodes]
+        return cls(joined)
+
 class Sentence(Text):
     pass
 
@@ -36,7 +41,7 @@ class Block(Node):
     text = ast.Field(Text)
 
 class Header(Block):
-    pass
+    level = ast.Field(int)
 
 class Paragraph(Block):
     pass
