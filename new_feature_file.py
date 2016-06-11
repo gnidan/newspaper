@@ -1,3 +1,3 @@
 
-class SweetFeature(object):
+class SweetFeatureObject(object):
     pass
