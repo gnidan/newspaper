@@ -1,0 +1,3 @@
+
+class SweetFeature(object):
+    pass
